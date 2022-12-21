@@ -21,7 +21,8 @@ QUERY=$(cat <<-EOF
 	Stacks[0].Outputs[?OutputKey==\`Url\`].OutputValue,
 	Stacks[0].Outputs[?OutputKey==\`VPCId\`].OutputValue
 ]
-EOF)
+EOF
+)
 
 RESULTS=$(aws cloudformation describe-stacks \
 	--stack-name $STACK_NAME \
@@ -38,7 +39,7 @@ VPCID=${RESULTS_ARRAY[4]}
 
 printf "${PRIMARY}* Authenticating with EC2 Container Repository${NC}\n";
 
-`aws ecr get-login --region $REGION --no-include-email`
+`aws ecr get-login-password --region $REGION --no-include-email`
 
 # Tag for versioning the container images, currently set to timestamp
 TAG=`date +%s`
@@ -92,7 +93,8 @@ do
 			}],
 			"essential": true
 		}]
-	EOF)
+	EOF
+	)
 
 	TASK_DEFINITION_ARN=`aws ecs register-task-definition \
 		--region $REGION \

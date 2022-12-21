@@ -36,16 +36,29 @@ Once we have verified this new microservice works we can remove the old code pat
 
 1. Launch an ECS cluster using the Cloudformation template:
 
-   ```
-   $ aws cloudformation deploy \
-   --template-file infrastructure/ecs.yml \
-   --region <region> \
-   --stack-name <stack name> \
-   --capabilities CAPABILITY_NAMED_IAM
+   ```sh
+   aws cloudformation deploy \
+      --template-file infrastructure/ecs.yml \
+      --region <region> \
+      --stack-name <stack name> \
+      --capabilities CAPABILITY_NAMED_IAM
    ```
 
 2. Deploy the services onto your cluster: 
 
+   ```sh
+   ./deploy.sh <region> <stack name>
    ```
-   $ ./deploy.sh <region> <stack name>
-   ```
+
+
+```sh
+aws cloudformation deploy \
+--template-file infrastructure/ecs.yml \
+--region eu-central-1 \
+--stack-name Breack3Services \
+--capabilities CAPABILITY_NAMED_IAM
+```
+
+```sh
+./deploy.sh eu-central-1 Breack3Services
+```
